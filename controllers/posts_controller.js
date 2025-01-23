@@ -69,7 +69,7 @@ const store = (req, res) => {
 
 // Update
 const update = (req, res) => {
-  //andiamo a cercae l'elemento da modificare integralmente tramite il metodo find
+  //andiamo a cercare l'elemento da modificare integralmente tramite il metodo find
   const post = postsData.find((elm) => elm.id == req.params.id);
 
   //eseguiamo un controllo sull'esistenza del post, in caso sia assente restituiamo un errore
@@ -91,7 +91,29 @@ const update = (req, res) => {
 
 // Modify
 const modify = (req, res) => {
-  res.send(`Modifica parziale del post ${req.params.id}`);
+  //andiamo a cercare l'elemento da modificare parzialmente tramite il metodo find
+  //questa volta sarà una "let" perchè non sostituiremo l'elemento ma lo modificheremo
+  let post = postsData.find((elm) => elm.id == req.params.id);
+
+  //eseguiamo un controllo sull'esistenza del post, in caso sia assente restituiamo un errore
+  if (!post) {
+    return res.status(404).json({
+      error: "Post not found",
+    });
+  }
+  //altrimenti andiamo ad aggiornare il post con il conenuto della request body
+  //utilizziamo lo spread operator in modo da ricopiare nel contenuto dell'oggetto tutto il vecchio contenuto
+  //in seguito gli diamo anche tutti i valori della request body che andranno a sostituire solamente le proprietà passate dall'utente
+  post = {
+    ...post,
+    ...req.body
+  }
+  
+
+  //andiamo a restituire il post modificato
+  res.json(post)
+  console.log(post)
+
 };
 
 // Destroy
