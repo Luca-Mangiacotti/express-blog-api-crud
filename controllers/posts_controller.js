@@ -69,7 +69,24 @@ const store = (req, res) => {
 
 // Update
 const update = (req, res) => {
-  res.send(`Modifica integrale del post: ${req.params.id}`);
+  //andiamo a cercae l'elemento da modificare integralmente tramite il metodo find
+  const post = postsData.find((elm) => elm.id == req.params.id);
+
+  //eseguiamo un controllo sull'esistenza del post, in caso sia assente restituiamo un errore
+  if (!post) {
+    return res.status(404).json({
+      error: "Post not found",
+    });
+  }
+  //altrimenti andiamo ad aggiornare il post con il conenuto della request body
+  post.title = req.body.title
+  post.content = req.body.content
+  post.tags = req.body.tags
+
+  //andiamo a restituire il post modificato
+  res.json(post)
+  console.log(postsData)
+
 };
 
 // Modify
@@ -77,7 +94,7 @@ const modify = (req, res) => {
   res.send(`Modifica parziale del post ${req.params.id}`);
 };
 
-// Delete
+// Destroy
 //creiamo una funzione che tramite il metodo find andrà per prima cosa a cercare l'elemento da distruggere
 const destroy = (req, res) => {
   const post = postsData.find((elm) => elm.id == req.params.id);
