@@ -18,6 +18,7 @@ const index = (req, res) => {
     );
   }
   //restituiamo l'array filtrato
+  console.log(filtredPost)
   res.json(filtredPost);
 };
 
