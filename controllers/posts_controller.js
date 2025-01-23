@@ -39,7 +39,32 @@ const show = (req, res) => {
 
 // Store
 const store = (req, res) => {
-  res.send("Creazione nuovo post");
+  //stampa in console del contenuto della request Body da noi inserita
+  console.log(`questa è la Request Body: `, req.body)
+
+  //andiamo a definire un nuovo id per l'elemento da aggiungere
+  const id = postsData[postsData.length-1].id + 1
+
+  //creiamo il nuovo oggetto da aggiungere 
+  const newPost ={
+      id,
+      title: req.body.title,
+      content: req.body.content,
+      image: req.body.image,
+      tags: req.body.tags
+
+  }
+
+  console.log(`questo è il nuovo post aggiunto: `,newPost)
+
+  //andiamo ad aggiungere il nuovo oggetto al nostro array
+  postsData.push(newPost)
+
+  //andiamo a restituire uno status 201 che conferma la creazione dell'elemento e lo restituiamo 
+
+  res.sendStatus(201)
+  // res.json(newPost)
+    
 };
 
 // Update

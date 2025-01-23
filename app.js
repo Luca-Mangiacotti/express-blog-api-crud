@@ -4,6 +4,8 @@ const app = express()
 const port = 3001
 //rendiamo file statici il contenuto della directory "public"
 app.use(express.static("public"));
+//inseriamo il body parser per dare possibilità alla nostra app di decodificare il json nella request body
+app.use(express.json())
 
 //router per i post
 const postsRouter = require("./routers/posts_router")
