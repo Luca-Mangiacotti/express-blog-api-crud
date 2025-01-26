@@ -8,6 +8,7 @@ const index = (req, res) => {
  
   //andiamo a salvare il nostro array di post da filtrare in una variabile
   let filtredPost = postsData;
+
   //otteniamo il valore dalla query string con chiave TAG
   const { tag } = req.query;
 
@@ -98,7 +99,7 @@ const modify = (req, res) => {
   //eseguiamo un controllo sull'esistenza del post, in caso sia assente restituiamo un errore
   if (!post) {
     return res.status(404).json({
-      error: "Post not found",
+      error: "Post not found"
     });
   }
   //altrimenti andiamo ad aggiornare il post con il conenuto della request body
@@ -132,7 +133,7 @@ const destroy = (req, res) => {
   postsData.splice(postsData.indexOf(post), 1);
 
   //restituiamo uno status 204 per comunicare all'utente della riuscita eliminazione
-  res.sendStatus(204);
+  res.sendStatus(204)
 };
 
 module.exports = { index, show, store, update, modify, destroy };
