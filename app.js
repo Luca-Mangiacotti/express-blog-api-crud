@@ -1,35 +1,38 @@
 //importiamo il framework express
-const express = require('express')
-const app = express()
-const port = 3001
+const express = require("express");
+const app = express();
+const port = 3001;
+
+//importiamo il gestore dei permessi CORS
+const cors = require("cors");
 //rendiamo file statici il contenuto della directory "public"
 app.use(express.static("public"));
 //inseriamo il body parser per dare possibilità alla nostra app di decodificare il json nella request body
-app.use(express.json())
+app.use(express.json());
+//inseriamo i permessi CORS
+app.use(cors({ origin: "http://localhost:5174/" }));
 
 //importiamo i routers per i post
-const postsRouter = require("./routers/posts_router")
+const postsRouter = require("./routers/posts_router");
 
 //importiamo i gestori di errore
-const error_handler = require("./middlewares/error_handler")
-const page_not_found = require("./middlewares/page_not_found")
+const error_handler = require("./middlewares/error_handler");
+const page_not_found = require("./middlewares/page_not_found");
 
 //indirizzo di partenza del server Blog
-app.get('/', (req, res) => {
-  res.send('Questo è il Server del blog')
-})
+app.get("/", (req, res) => {
+  res.send("Questo è il Server del blog");
+});
 
 //registro le rotte per i post
 app.use("/posts", postsRouter);
 
 //utilizziamo i gestori di errore
 //middleware che gestisce gli errori 404
-app.use(page_not_found)
+app.use(page_not_found);
 //middleware che gestisce gli errori interni del server
-app.use(error_handler)
-
+app.use(error_handler);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-      
+  console.log(`Example app listening on port ${port}`);
+});
