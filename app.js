@@ -10,7 +10,7 @@ app.use(express.static("public"));
 //inseriamo il body parser per dare possibilità alla nostra app di decodificare il json nella request body
 app.use(express.json());
 //inseriamo i permessi CORS
-app.use(cors({ origin: "http://localhost:5174/" }));
+app.use(cors());
 
 //importiamo i routers per i post
 const postsRouter = require("./routers/posts_router");
