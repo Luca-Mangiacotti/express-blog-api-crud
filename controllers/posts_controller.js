@@ -50,6 +50,7 @@ const store = (req, res) => {
     content: req.body.content,
     image: req.body.image,
     tags: req.body.tags,
+    category: req.body.category,
     available: req.body.available,
   };
 
@@ -78,7 +79,10 @@ const update = (req, res) => {
   //altrimenti andiamo ad aggiornare il post con il conenuto della request body
   post.title = req.body.title;
   post.content = req.body.content;
+  post.image = req.body.image;
   post.tags = req.body.tags;
+  post.category = req.body.category;
+  post.available = req.body.available;
 
   //andiamo a restituire il post modificato
   res.json(post);
