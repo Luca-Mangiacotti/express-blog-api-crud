@@ -50,6 +50,7 @@ const store = (req, res) => {
     content: req.body.content,
     image: req.body.image,
     tags: req.body.tags,
+    available: req.body.available,
   };
 
   console.log(`questo è il nuovo post aggiunto: `, newPost);
