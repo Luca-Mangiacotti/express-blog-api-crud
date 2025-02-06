@@ -59,7 +59,7 @@ const store = (req, res) => {
 
   //andiamo a restituire uno status 201 che conferma la creazione dell'elemento e lo restituiamo
 
-  res.sendStatus(201);
+  res.status(201).json(newPost);
   // res.json(newPost)
 };
 
